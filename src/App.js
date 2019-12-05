@@ -1,25 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
+import QuizLayout from './components/quiz-layout';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <h1>Quiz on Important Facts</h1>
+      <div className="quiz-container">
+        <QuizLayout></QuizLayout>
+      </div>
+      <button id="previous">Previous Question</button>
+      <button id="next">Next Question</button>
+      <button id="submit">Submit Quiz</button>
+      <div id="results"></div>
+    </React.Fragment>
   );
 }
 
