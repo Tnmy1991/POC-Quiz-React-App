@@ -23,6 +23,7 @@ h1{
 .answers {
   margin-bottom: 20px;
   text-align: center;
+  display: inline-block;
 }
 .answers label{
   display: block;
@@ -37,7 +38,8 @@ button{
     border-radius: 3px;
     padding: 10px;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
+    display: block;
 }
 button:hover{
     background-color: #38a;
@@ -62,9 +64,15 @@ button:hover{
 }
 .quiz-container{
   position: relative;
-  height: 500px;
-  margin-top: 40px;
+  min-height: 250px;
+  margin-top: 5px;
+  margin-bottom: 30px;
 }
+.quiz-navigation {
+  text-align: center;
+  display: inline-flex;
+}
+.quiz-navigation button { margin-left: 5px; }
 ol {
   position: relative;
   display: block;

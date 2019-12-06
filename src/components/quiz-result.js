@@ -11,16 +11,16 @@ class QuizResult extends React.Component{
         <h1>{title}</h1>
         <ol>
           {data.map((item) => (
-            <li>
+            <li key={item._id}>
               {item.status ? (
                 <React.Fragment>
                   +{item.point}
-                  <span class="details">Correct</span>
+                  <span className="details">Correct</span>
                 </React.Fragment>
               ) : (
                 <React.Fragment>
                   +0
-                  <span class="details">Correct answer is {item.correct_ans}</span>
+                  <span className="details">Correct answer is {item.correct_ans}</span>
                 </React.Fragment>
               )}
             </li>

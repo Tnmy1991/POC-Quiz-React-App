@@ -111,9 +111,11 @@ class QuizLayout extends React.Component {
               
             ))}
           </div>
-          <button className={showPrev} onClick={(e) => this.previousQuestion(e)}>Previous Question</button>
-          <button className={showNext} onClick={(e) => this.nextQuestion(e)}>Next Question</button>
-          <button className={showSubmit} onClick={(e) => this.prepareResult(e)}>Submit Quiz</button>
+          <div className="quiz-navigation">
+            <button className={showPrev} onClick={(e) => this.previousQuestion(e)}>Previous Question</button>
+            <button className={showNext} onClick={(e) => this.nextQuestion(e)}>Next Question</button>
+            <button className={showSubmit} onClick={(e) => this.prepareResult(e)}>Submit Quiz</button>
+          </div>
         </React.Fragment>
       ) : (
         <QuizResult></QuizResult>
