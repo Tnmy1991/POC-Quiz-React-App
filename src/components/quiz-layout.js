@@ -36,13 +36,13 @@ class QuizLayout extends React.Component {
     let elements = this.quizContainerRef.current;
     if (elements instanceof HTMLElement) {
       const childs = elements.querySelectorAll('.slide');
-      let progressBar = elements.querySelector('.progressBar');
       if( elements.querySelector('.active-slide') )
         elements.querySelector('.active-slide').classList.remove('active-slide');
       childs.forEach((elem, key) => {
         if( key === index) {
-          let time_limit = elem.getAttribute("data-countdown");
           elem.classList.add('active-slide');
+          let time_limit = elem.getAttribute("data-countdown");
+          let progressBar = elements.querySelector('#remaining-counter-bar-'+index);
           this.progress(time_limit, time_limit, progressBar, index);
         }
       });
@@ -123,11 +123,11 @@ class QuizLayout extends React.Component {
       !result ? (
         <React.Fragment>
           <div ref={this.quizContainerRef} className="quiz-container">
-            <div className="progressBar">
-              <div className="bar"></div>
-            </div>
             {questions.map((question, index) => (
               <div key={question._id} data-countdown={question.time_limit} className="slide">
+                <div id={'remaining-counter-bar-'+index} className="progressBar">
+                  <div className="bar"></div>
+                </div>
                 <div className="question"> {question.question} </div>
                 <div className="answers">
                   {question.options.map(option => (
@@ -135,7 +135,6 @@ class QuizLayout extends React.Component {
                   ))}
                 </div>
               </div>
-              
             ))}
           </div>
           <div ref={this.quizNavigationRef} className="quiz-navigation">
