@@ -8,9 +8,9 @@ button{font-family:'Work Sans',sans-serif;font-size:16px;background-color:#279;c
 button:hover{background-color:#38a}
 .show{display:block}
 .hide{display:none}
-.slide{position:absolute;left:0;top:0;width:100%;z-index:2;opacity:1;transition:opacity .5s;display:none}
+.slide{position:absolute;left:0;top:20px;width:100%;z-index:2;opacity:1;transition:opacity .5s;display:none}
 .active-slide{display:block}
-.quiz-container{position:relative;min-height:250px;margin-top:5px;margin-bottom:30px}
+.quiz-container{position:relative;min-height:275px;margin-top:5px;margin-bottom:30px}
 .quiz-navigation{text-align:center;display:inline-flex}
 .quiz-navigation button{margin-left:5px}
 ol{position:relative;display:block;margin:100px;height:4px;background:#9b2}
@@ -25,3 +25,5 @@ li:hover{cursor:pointer;color:#28e}
 li:hover::before{top:1px;left:-31px;width:8px;height:8px;border-width:5px;border-color:#28e}
 li:hover .details{display:block;color:#444}
 h1.result{margin:0 0 10px 0px;background-color:#f8f6f0;color:#444;}
+.progressBar{width:90%;margin:10px auto;height:22px;background-color:#0A5F44;}
+.progressBar div{height:100%;text-align:right;padding:0 10px;line-height:22px;background-color:#CBEA00;box-sizing:border-box;}

@@ -11,7 +11,8 @@ class QuizLayout extends React.Component {
       questions: [],
       result: false
     };
-    this.myRef = React.createRef();
+    this.quizContainerRef = React.createRef();
+    this.quizNavigationRef = React.createRef();
 
     ls.remove('quiz_answer');
     ls.remove('quiz_submission_data');
@@ -25,19 +26,24 @@ class QuizLayout extends React.Component {
         questions: res.data
       });
       ls.set('quiz_questions_count', (res.data.length - 1));
+      this.toggleSlide(0);
     }).catch(function (error) {
       console.log(error);
     });
   }
 
   toggleSlide(index) {
-    let elements = this.myRef.current;
+    let elements = this.quizContainerRef.current;
     if (elements instanceof HTMLElement) {
       const childs = elements.querySelectorAll('.slide');
-      elements.querySelector('.active-slide').classList.remove('active-slide');
+      let progressBar = elements.querySelector('.progressBar');
+      if( elements.querySelector('.active-slide') )
+        elements.querySelector('.active-slide').classList.remove('active-slide');
       childs.forEach((elem, key) => {
         if( key === index) {
+          let time_limit = elem.getAttribute("data-countdown");
           elem.classList.add('active-slide');
+          this.progress(time_limit, time_limit, progressBar, index);
         }
       });
       this.setState({
@@ -90,6 +96,23 @@ class QuizLayout extends React.Component {
     });
   }
 
+  progress(timeleft, timetotal, element, index) {
+    let ref = this;
+    var progressBarWidth = timeleft * element.offsetWidth / timetotal;
+    element.querySelector('div').style.width = progressBarWidth + 'px';
+    if(timeleft > 0) {
+      setTimeout(function() {
+        ref.progress(timeleft - 1, timetotal, element, index);
+      }, 1000);
+    } else if(timeleft === 0) {
+      let elements = this.quizNavigationRef.current;
+      if(index === 4)
+        elements.querySelector("#submission-button").click();
+      else
+        elements.querySelector("#next-nav-button").click();
+    }
+  }
+
   render() {
     const { slide, questions, result } = this.state;
     let showPrev = slide > 0 ? 'show' : 'hide';
@@ -99,9 +122,12 @@ class QuizLayout extends React.Component {
     return(
       !result ? (
         <React.Fragment>
-          <div ref={this.myRef} className="quiz-container">
+          <div ref={this.quizContainerRef} className="quiz-container">
+            <div className="progressBar">
+              <div className="bar"></div>
+            </div>
             {questions.map((question, index) => (
-              <div key={question._id} className={ index === 0 ? "slide active-slide" : "slide" }>
+              <div key={question._id} data-countdown={question.time_limit} className="slide">
                 <div className="question"> {question.question} </div>
                 <div className="answers">
                   {question.options.map(option => (
@@ -112,10 +138,10 @@ class QuizLayout extends React.Component {
               
             ))}
           </div>
-          <div className="quiz-navigation">
-            <button className={showPrev} onClick={(e) => this.previousQuestion(e)}>Previous Question</button>
-            <button className={showNext} onClick={(e) => this.nextQuestion(e)}>Next Question</button>
-            <button className={showSubmit} onClick={(e) => this.prepareResult(e)}>Submit Quiz</button>
+          <div ref={this.quizNavigationRef} className="quiz-navigation">
+            <button id="previous-nav-button" className={showPrev} onClick={(e) => this.previousQuestion(e)}>Previous Question</button>
+            <button id="next-nav-button" className={showNext} onClick={(e) => this.nextQuestion(e)}>Next Question</button>
+            <button id="submission-button" className={showSubmit} onClick={(e) => this.prepareResult(e)}>Submit Quiz</button>
           </div>
         </React.Fragment>
       ) : (
