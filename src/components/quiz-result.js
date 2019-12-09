@@ -12,24 +12,28 @@ class QuizResult extends React.Component{
 
     return(
       <React.Fragment>
-        <h1>{title}</h1>
         <ol>
           {data.map((item) => (
             <li key={item._id}>
               {item.status ? (
                 <React.Fragment>
                   +{item.point}
-                  <span className="details">Correct</span>
+                  <p className="details">
+                    <strong>{item.question}</strong>
+                    <strong><i>Correct Ans. {item.correct_ans}</i></strong>
+                  </p>
                 </React.Fragment>
               ) : (
                 <React.Fragment>
                   +0
-                  <span className="details">Correct answer is {item.correct_ans}</span>
+                  <strong>{item.question}</strong>
+                  <strong><i>Correct Ans. {item.correct_ans}</i></strong>
                 </React.Fragment>
               )}
             </li>
           ))}
         </ol>
+        <h1 className="result">{title}</h1>
         <div className="quiz-navigation">
           <button onClick={(e) => this.restartQuiz(e)}>Restart Quiz</button>
         </div>
