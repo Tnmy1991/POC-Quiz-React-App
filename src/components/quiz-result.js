@@ -20,6 +20,7 @@ class QuizResult extends React.Component{
                   +{item.point}
                   <p className="details">
                     <strong>{item.question}</strong>
+                    <br />
                     <strong><i>Correct Ans. {item.correct_ans}</i></strong>
                   </p>
                 </React.Fragment>
@@ -28,7 +29,8 @@ class QuizResult extends React.Component{
                   +0
                   <p className="details">
                     <strong>{item.question}</strong>
-                    <strong><i>Correct Ans. {item.correct_ans}</i></strong>
+                    <br />
+                    <strong>Correct Ans. <i>{item.correct_ans}</i></strong>
                   </p>
                 </React.Fragment>
               )}
