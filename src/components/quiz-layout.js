@@ -12,6 +12,10 @@ class QuizLayout extends React.Component {
       result: false
     };
     this.myRef = React.createRef();
+
+    ls.remove('quiz_answer');
+    ls.remove('quiz_submission_data');
+    ls.remove('quiz_submission_title');
   }
 
   componentDidMount() {
@@ -20,7 +24,6 @@ class QuizLayout extends React.Component {
       this.setState({
         questions: res.data
       });
-      ls.remove('quiz_answer');
       ls.set('quiz_questions_count', (res.data.length - 1));
     }).catch(function (error) {
       console.log(error);
@@ -77,8 +80,6 @@ class QuizLayout extends React.Component {
         answer: ls.get('quiz_answer')
       }
     }).then(res => {
-      ls.remove('quiz_answer');
-      ls.remove('quiz_questions_count');
       ls.set('quiz_submission_title', res.data.msg);
       ls.set('quiz_submission_data', res.data.data);
       this.setState({

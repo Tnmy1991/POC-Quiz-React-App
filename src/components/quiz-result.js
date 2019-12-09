@@ -2,6 +2,10 @@ import React from 'react';
 import ls from 'local-storage';
 
 class QuizResult extends React.Component{
+  restartQuiz() {
+    window.location.reload(false);
+  }
+
   render() {
     let title = ls.get('quiz_submission_title');
     let data  = ls.get('quiz_submission_data');
@@ -26,6 +30,9 @@ class QuizResult extends React.Component{
             </li>
           ))}
         </ol>
+        <div className="quiz-navigation">
+          <button onClick={(e) => this.restartQuiz(e)}>Restart Quiz</button>
+        </div>
       </React.Fragment>
     )
   }
