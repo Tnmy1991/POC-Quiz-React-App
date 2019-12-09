@@ -26,8 +26,10 @@ class QuizResult extends React.Component{
               ) : (
                 <React.Fragment>
                   +0
-                  <strong>{item.question}</strong>
-                  <strong><i>Correct Ans. {item.correct_ans}</i></strong>
+                  <p className="details">
+                    <strong>{item.question}</strong>
+                    <strong><i>Correct Ans. {item.correct_ans}</i></strong>
+                  </p>
                 </React.Fragment>
               )}
             </li>
